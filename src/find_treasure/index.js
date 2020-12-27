@@ -1,6 +1,4 @@
-const getRandomNumber = (size) => {
-  return Math.floor(Math.random() * size);
-};
+import { getRandomNumber } from '../../helpers/numbers.js';
 
 const getDistance = (event, target) => {
   const diffX = event.offsetX - target.x;
@@ -30,13 +28,26 @@ const showDistanceHint = (distanceHint) => {
   $('#distance-hint').text(distanceHint);
 };
 
+const showAttemptsHint = (customerClicks, maxAttempts) => {
+  const restAttempts = maxAttempts - customerClicks;
+  const attemptsStr = restAttempts === 1 ? 'attempt' : 'attempts';
+  const hint = `You have ${restAttempts} ${attemptsStr}`;
+
+  $('#attempts-hint').text(hint);
+};
+
 const isFound = (distance) => {
   return distance < 8;
+};
+
+const isFail = (customerClicks) => {
+  return customerClicks >= maxAttempts;
 };
 
 let customerClicks = 0;
 const width = 400;
 const height = 400;
+const maxAttempts = 10;
 
 const target = {
   x: getRandomNumber(width),
@@ -46,13 +57,18 @@ const target = {
 $('#map').on('click', (event) => {
   customerClicks++;
 
+  showAttemptsHint(customerClicks, maxAttempts)
+
+  if (isFail(customerClicks) === true) {
+    alert('You lose :(');
+  }
+
   const distance = getDistance(event, target);
   const distanceHint = getDistanceHint(distance);
 
-  console.log(distance);
-
   if (isFound(distance) === true) {
-    alert('Yeah! You used' + customerClicks);
+    const clicks = customerClicks === 1 ? ' click' : ' clicks';
+    alert('Yeah! You used ' + customerClicks + clicks);
   }
 
   showDistanceHint(distanceHint);
