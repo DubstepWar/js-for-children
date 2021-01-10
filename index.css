@@ -1,3 +1,33 @@
 .wrapper {
   padding: 10px;
 }
+
+.bordered {
+  border-radius: 5px;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+.nav-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #d3d5dd;
+}
+
+.nav-list__link {
+  padding: 10px;
+}
+
+.nav-list__link:hover {
+  background: #b2b4ba;
+}
+
+.nav-list__link a {
+  text-decoration: none;
+  color:#121212;
+}

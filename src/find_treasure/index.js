@@ -57,10 +57,11 @@ const target = {
 $('#map').on('click', (event) => {
   customerClicks++;
 
-  showAttemptsHint(customerClicks, maxAttempts)
+  showAttemptsHint(customerClicks, maxAttempts);
 
   if (isFail(customerClicks) === true) {
-    alert('You lose :(');
+    customerClicks = 0; // reset counter
+    alert('You loose :(');
   }
 
   const distance = getDistance(event, target);
